@@ -1,7 +1,5 @@
-
-
 const initialState = {
-    isAuth: true,
+    isAuth: false,
     username: "",
     userId: "",
     token: ""
