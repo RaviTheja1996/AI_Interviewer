@@ -1,0 +1,1 @@
+const openaiFunction = (req, res) => { }
