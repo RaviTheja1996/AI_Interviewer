@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 // import axios from "axios";
 
-const App = () => {
+const ReactApp = () => {
   const [globalTranscript, setGlobalTranscript] = useState("");
   const [recognition, setRecognition] = useState(null);
 
@@ -77,4 +77,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default ReactApp;
