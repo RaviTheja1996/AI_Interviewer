@@ -1,1 +1,0 @@
-const openaiFunction = async (req, res) => { }
