@@ -1,8 +1,11 @@
-import React from 'react'
+import React from 'react';
+
 
 const Interview = () => {
   return (
-    <div>Interview</div>
+    <div>
+      
+    </div>
   )
 }
 
