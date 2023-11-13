@@ -1,8 +1,14 @@
 const jwt = require("jsonwebtoken");
+const {BlackListModel} = require("../models/blacklist.model");
 
-const authMiddleware = (req, res, next) => {
+const authMiddleware = async (req, res, next) => {
   const token = req.headers.authorization?.split(" ")[1];
   if (token) {
+    const logout_token = await BlackListModel.findOne({token});
+    if(logout_token)
+    {
+      return res.status(200).send({status: "fail",message: "You are logged out already please login"});
+    }
     jwt.verify(token, "hackforce", (err, decoded) => {
       if (decoded) {
         req.body.username = decoded.username;
