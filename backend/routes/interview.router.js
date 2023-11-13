@@ -22,7 +22,7 @@ AI_Interviewer_Router.post("/node", nodeInterviewPost);
 AI_Interviewer_Router.post("/fullstack", fullstackInterviewPost);
 
 // get routes
-// AI_Interviewer_Router.get("/", getUserInterviewData);
+AI_Interviewer_Router.get("/", getUserInterviewData);
 
 // patch routes
 AI_Interviewer_Router.patch("/javascript", jsInterviewPatch);
