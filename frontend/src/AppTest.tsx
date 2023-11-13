@@ -1,14 +1,3 @@
-import React from 'react'
-
-const AppTest = () => {
-  return (
-    <div>AppTest</div>
-  )
-}
-
-export default AppTest
-
-
 
 // -------------------------------
 // V1 BASIC SETUP

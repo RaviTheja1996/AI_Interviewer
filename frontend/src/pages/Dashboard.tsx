@@ -1,10 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
+import Status from '../components/Status';
+import Myinterviews from '../components/Myinterviews';
+import Cookies from "js-cookie"
 
 interface Props {}
 
 const Dashboard: React.FC<Props> = () => {
   const [isUserMenuOpen, setUserMenuOpen] = useState(false);
   const userMenuButtonRef = useRef<HTMLButtonElement | null>(null);
+  const token: string | undefined = Cookies.get("token") || undefined;
+
 
   const toggleUserMenu = () => {
     setUserMenuOpen(!isUserMenuOpen);
@@ -34,7 +39,7 @@ const Dashboard: React.FC<Props> = () => {
 
   return (
     <div>
-      <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+      <nav className="fixed top-0 z-50 w-full bg-gray-800 border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
         <div className="px-3 py-3 lg:px-5 lg:pl-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-start rtl:justify-end">
@@ -66,7 +71,7 @@ const Dashboard: React.FC<Props> = () => {
                   className="h-8 me-3"
                   alt="FlowBite Logo"
                 />
-                <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
+                <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-white">
                   AI Interviewer
                 </span>
               </a>
@@ -85,7 +90,7 @@ const Dashboard: React.FC<Props> = () => {
                     <img
                       className="w-8 h-8 rounded-full"
                       src="https://img.freepik.com/premium-photo/memoji-happy-man-white-background-emoji_826801-6840.jpg?size=338&ext=jpg&ga=GA1.1.1826414947.1698883200&semt=ais"
-                      alt="user photo"
+                      alt="img"
                     />
                   </button>
                 </div>
@@ -158,7 +163,7 @@ const Dashboard: React.FC<Props> = () => {
             </li>
             <li>
               <a
-                href="#"
+                href="/dashboard"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <svg
@@ -177,56 +182,111 @@ const Dashboard: React.FC<Props> = () => {
         
             <li>
               <a
-                href="/"
+                href="/interviews"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
-                <svg
-                  className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M3 0C1.34315 0 0 1.34315 0 3V17C0 18.6569 1.34315 20 3 20H17C18.6569 20 20 18.6569 20 17V3C20 1.34315 18.6569 0 17 0H3ZM2 3C2 2.44772 2.44772 2 3 2H17C17.5523 2 18 2.44772 18 3V17C18 17.5523 17.5523 18 17 18H3C2.44772 18 2 17.5523 2 17V3ZM12 12C12 11.4477 12.4477 11 13 11C13.5523 11 14 11.4477 14 12C14 12.5523 13.5523 13 13 13C12.4477 13 12 12.5523 12 12ZM9 3C9 2.44772 9.44772 2 10 2C10.5523 2 11 2.44772 11 3C11 3.55228 10.5523 4 10 4C9.44772 4 9 3.55228 9 3ZM10 6C8.89543 6 8 6.89543 8 8C8 9.10457 8.89543 10 10 10C11.1046 10 12 9.10457 12 8C12 6.89543 11.1046 6 10 6Z"
-                  />
-                </svg>
-                <span className="ml-2">Roadmaps</span>
+               <svg
+  className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+  aria-hidden="true"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="currentColor"
+  viewBox="0 0 20 20"
+>
+  <path
+    fillRule="evenodd"
+    clipRule="evenodd"
+    d="M10 0C4.47715 0 0 4.47715 0 10C0 13.3148 1.92579 16.3141 5 18.3V20L7.70292 17.5H12.2971L15 20V18.3C18.0742 16.3141 20 13.3148 20 10C20 4.47715 15.5228 0 10 0ZM8.875 12.5C8.875 13.3284 9.54645 14 10.375 14C11.2036 14 11.875 13.3284 11.875 12.5C11.875 11.6716 11.2036 11 10.375 11C9.54645 11 8.875 11.6716 8.875 12.5ZM14.375 12.5C14.375 11.1766 13.1982 10 11.875 10C10.5518 10 9.375 11.1766 9.375 12.5C9.375 13.8234 10.5518 15 11.875 15C13.1982 15 14.375 13.8234 14.375 12.5Z"
+  />
+</svg>
+
+                <span className="ml-2">Interviews</span>
               </a>
             </li>
-            <li>
-              <a
-                href="#"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-              >
-                   <svg
-      className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
+            {token ? (
+  <li>
+    <a
+      href="/logout"
+      className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
     >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M14 19l-7-7m0 0l7-7m-7 7h18"
-      ></path>
-    </svg>
-                <span className="ml-2">Logout</span>
-              </a>
-            </li>
+      <svg
+        className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M14 19l-7-7m0 0l7-7m-7 7h18"
+        ></path>
+      </svg>
+      <span className="ml-2">Logout</span>
+    </a>
+  </li>
+) : (
+  <>
+    <li>
+      <a
+        href="/login"
+        className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+      >
+     <svg
+  className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+  fill="none"
+  stroke="currentColor"
+  viewBox="0 0 24 24"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth="2"
+    d="M14 19l-7-7m0 0l7-7m-7 7h18"
+  ></path>
+</svg>
+        <span className="ml-2">Login</span>
+      </a>
+    </li>
+    <li>
+      <a
+        href="/register"
+        className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+      >
+       <svg
+  className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+  fill="none"
+  stroke="currentColor"
+  viewBox="0 0 24 24"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth="2"
+    d="M14 19l-7-7m0 0l7-7m-7 7h18"
+  ></path>
+</svg>
+        <span className="ml-2">Sign up</span>
+      </a>
+    </li>
+  </>
+)}
+
           </ul>
         </div>
       </aside>
-
+    {/* //Content */}
       <div className="p-4 sm:ml-64">
-        <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
+        <div className="p-4 border-2 border-gray-200 border-solid rounded-lg dark:border-gray-700 ">
           {/* Your content goes here */}
-          <h1>Interviews</h1>
+          <Status/>
         </div>
+        {/* <hr className='mt-2 border-black' /> */}
+      </div>
+      <div className="p-4 sm:ml-64" >
+        <Myinterviews/>
       </div>
     </div>
   );
