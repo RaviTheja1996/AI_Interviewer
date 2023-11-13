@@ -1,37 +1,38 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const interviewSchema = new mongoose.Schema({
   question: { type: String, required: true },
   userResponse: { type: String },
   feedback: {
-    strengths: [{ type: String }], improvements: [{ type: String }]
-  }
+    strengths: [{ type: String }],
+    improvements: [{ type: String }],
+  },
 });
 
 const interviewFeedbackSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   interviewType: { type: String, required: true },
   strengths: [{ type: String }],
   improvements: [{ type: String }],
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now },
 });
 
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
-  avatar: {type: String, required: true},
+  avatar: { type: String, required: true },
   interviews: [
     {
-      type: { type: String, enum: ['react', 'mern', 'nem'] },
+      type: { type: String, enum: ["react", "mern", "nem"] },
       feedback: {
-        type: interviewFeedbackSchema
+        type: interviewFeedbackSchema,
       },
-      conversations: [interviewSchema]
-    }
-  ]
+      conversations: [interviewSchema],
+    },
+  ],
 });
 
-const UserModel = mongoose.model('User', userSchema);
+const UserModel = mongoose.model("User", userSchema);
 
 module.exports = { UserModel };
