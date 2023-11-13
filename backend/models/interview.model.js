@@ -24,6 +24,10 @@ const interviewSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    problemSolving: {
+      type: Number,
+      default: 0,
+    },
     hiringCriteria: {
       type: String,
       enum: ["No Hire", "Hire", "Strong Hire"],
