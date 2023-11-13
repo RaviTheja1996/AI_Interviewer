@@ -33,7 +33,7 @@ function classNames(...classes: (string | boolean)[]): string {
   return classes.filter(Boolean).join(' ');
 }
 
-const EntireLayout = () => {
+const Navbar = () => {
     return (
         <>
           <div className="min-h-full">
@@ -189,4 +189,4 @@ const EntireLayout = () => {
   )
 }
 
-export default EntireLayout
+export default Navbar
