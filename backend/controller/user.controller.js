@@ -87,7 +87,7 @@ const userLogin = async (req, res) => {
 };
 
 const userLogout = async (req, res) => {
-  const tokenValue = req.headers.token?.split(" ")[1];
+  const tokenValue = req.headers.authorization?.split(" ")[1];
   try {
     if (!tokenValue) {
       throw new Error("Token not provided in the headers");
