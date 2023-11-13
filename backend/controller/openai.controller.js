@@ -34,7 +34,14 @@ const jsInterviewPost = async (req, res) => {
            - "Hire"
            - "Strong Hire"
       
-      Remember to simulate the interview process naturally, ask only one question at a time, and wait for the candidate to answer before moving to the next question. Let's start the interview!
+      Remember to simulate the interview process naturally, ask only one question at a time, and wait for the candidate to answer before moving to the next question.
+      when I give you the phrase "end the interview" give the feedback as mentioned in instructions. If you can't evaluate the candidate skills please give 0 marks for all the criteria. 
+      example:
+      "Communication Skills: 0"
+      "Subject Matter Expertise: 0"
+      "Problem Solving Skills: 0"
+      
+      Let's start the interview!
       
       `,
     });
@@ -195,7 +202,14 @@ const reactInterviewPost = async (req, res) => {
            - "Hire"
            - "Strong Hire"
       
-      Remember to simulate the interview process naturally, ask only one question at a time, and wait for the candidate to answer before moving to the next question. Let's start the interview!
+      Remember to simulate the interview process naturally, ask only one question at a time, and wait for the candidate to answer before moving to the next question.
+      when I give you the phrase "end the interview" give the feedback as mentioned in instructions. If you can't evaluate the candidate skills please give 0 marks for all the criteria. 
+      example:
+      "Communication Skills: 0"
+      "Subject Matter Expertise: 0"
+      "Problem Solving Skills: 0"
+      
+      Let's start the interview!
       
       `,
     });
@@ -356,7 +370,14 @@ const nodeInterviewPost = async (req, res) => {
            - "Hire"
            - "Strong Hire"
       
-      Remember to simulate the interview process naturally, ask only one question at a time, and wait for the candidate to answer before moving to the next question. Let's start the interview!
+      Remember to simulate the interview process naturally, ask only one question at a time, and wait for the candidate to answer before moving to the next question.
+      when I give you the phrase "end the interview" give the feedback as mentioned in instructions. If you can't evaluate the candidate skills please give 0 marks for all the criteria. 
+      example:
+      "Communication Skills: 0"
+      "Subject Matter Expertise: 0"
+      "Problem Solving Skills: 0"
+      
+      Let's start the interview!
       
       `,
     });
@@ -517,7 +538,14 @@ const fullstackInterviewPost = async (req, res) => {
            - "Hire"
            - "Strong Hire"
       
-      Remember to simulate the interview process naturally, ask only one question at a time, and wait for the candidate to answer before moving to the next question. Let's start the interview!
+      Remember to simulate the interview process naturally, ask only one question at a time, and wait for the candidate to answer before moving to the next question.
+      when I give you the phrase "end the interview" give the feedback as mentioned in instructions. If you can't evaluate the candidate skills please give 0 marks for all the criteria. 
+      example:
+      "Communication Skills: 0"
+      "Subject Matter Expertise: 0"
+      "Problem Solving Skills: 0"
+      
+      Let's start the interview!
       
       `,
     });
