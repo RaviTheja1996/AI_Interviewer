@@ -9,7 +9,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use("/users", userRouter);
+app.use("/user", userRouter);
 app.use("/interview", AI_Interviewer_Router);
 
 app.listen(process.env.PORT, async () => {
