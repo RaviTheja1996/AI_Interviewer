@@ -6,7 +6,7 @@ const { userLogout } = require("../controller/user.controller");
 const userRouter = express.Router();
 
 userRouter.post("/register", userRegister);
-userRouter.get("/login",userLogin);
-userRouter.get("/logout",userLogout);
+userRouter.post("/login", userLogin);
+userRouter.get("/logout", userLogout);
 
 module.exports = { userRouter };
