@@ -27,7 +27,7 @@ function classNames(...classes: (string | boolean)[]): string {
 
 const navigation: NavigationItem[] = [
   { name: 'Home', href: '/', current: false },  
-  { name: 'Dashboard', href:'/dashboard', current: true },
+  { name: 'Dashboard', href:'/dashboard', current: false },
   { name: 'About', href: '/about', current: false },
   { name: 'Lists', href: '/list', current: false },
 
@@ -35,7 +35,7 @@ const navigation: NavigationItem[] = [
 
 export default function Navbar2() {
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure as="nav" className="bg-gray-800 h-14">
       {({ open }: { open: boolean }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -54,11 +54,17 @@ export default function Navbar2() {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <img
-                    className="h-8 w-auto"
-                    src="https://huru.ai/wp-content/uploads/2023/05/HURU-LOGO.webp"
-                    alt="Your Company"
-                  />
+                <a href="/" className="flex ms-2 md:me-24">
+                <img
+                  src="https://huru.ai/wp-content/uploads/2023/05/HURU-LOGO.webp"
+                  className="h-8 me-3"
+                  alt="FlowBite Logo"
+                />
+                <span className="text-white self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
+                  AI Interviewer
+                </span>
+              </a>
+              
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
