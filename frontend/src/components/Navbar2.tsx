@@ -62,11 +62,11 @@ export default function Navbar2() {
                 <img
                   src="https://huru.ai/wp-content/uploads/2023/05/HURU-LOGO.webp"
                   className="h-8 me-3"
-                  alt="FlowBite Logo"
+                  alt="Logo"
                 />
-                <span className="text-white self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
-                  AI Interviewer
-                </span>
+                <span className="text-white self-center hidden sm:flex text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
+  AI Interviewer
+</span>
               </a>
               
                 </div>

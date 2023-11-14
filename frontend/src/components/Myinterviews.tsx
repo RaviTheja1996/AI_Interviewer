@@ -18,7 +18,7 @@ const Myinterviews = () => {
                 Completed
             </div>
         </div>
-        <hr className='border-black p-2 mt-2' />
+        <hr className='border-gray-600 p-2 mt-2' />
         <div className='lg:grid grid-cols-3 justify-center'>
             <Card/>
             <Card/>

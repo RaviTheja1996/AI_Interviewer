@@ -155,7 +155,7 @@ const Testimonial: React.FC<TestimonialProps> = ({ name, position, text, image }
       <img
         src={image}
         alt={`Testimonial by ${name}`}
-        className="w-2/12 mx-auto mb-4 "
+        className="sm:6/12 lg:w-2/12 mx-auto mb-4 "
       />
       <p className="text-lg font-bold text-gray-300">{name}</p>
       <p className="text-gray-500">{position}</p>

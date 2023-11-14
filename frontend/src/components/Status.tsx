@@ -17,12 +17,13 @@ const Status = () => {
                   <p >0</p>
                 </div>
             </div>
-            <div className='flex w-10/12 border-black border-2 rounded-lg p-2 '>
+            <div className='flex w-10/12 border-gray-600 border-2 rounded-lg p-2 '>
             <div>
                     <img className='w-16' src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiM1Nzg5RkYiIHZpZXdCb3g9IjAgMCAyNTYgMjU2Ij48cGF0aCBkPSJNMjE2LDcyVjE3Nkg0MFY3MkExNiwxNiwwLDAsMSw1Niw1NkgyMDBBMTYsMTYsMCwwLDEsMjE2LDcyWiIgb3BhY2l0eT0iMC4yIi8+PHBhdGggZD0iTTIzMiwxNjhoLThWNzJhMjQsMjQsMCwwLDAtMjQtMjRINTZBMjQsMjQsMCwwLDAsMzIsNzJ2OTZIMjRhOCw4LDAsMCwwLTgsOHYxNmEyNCwyNCwwLDAsMCwyNCwyNEgyMTZhMjQsMjQsMCwwLDAsMjQtMjRWMTc2QTgsOCwwLDAsMCwyMzIsMTY4Wk00OCw3MmE4LDgsMCwwLDEsOC04SDIwMGE4LDgsMCwwLDEsOCw4djk2SDQ4Wk0yMjQsMTkyYTgsOCwwLDAsMS04LDhINDBhOCw4LDAsMCwxLTgtOHYtOEgyMjRaTTE1Miw4OGE4LDgsMCwwLDEtOCw4SDExMmE4LDgsMCwwLDEsMC0xNmgzMkE4LDgsMCwwLDEsMTUyLDg4WiIvPjwvc3ZnPg==" alt="progress" />
                 </div>
                 <div className='p-2'>
                   <p>Interview in Progress</p>
+                  <p >0</p>
                 </div>
             </div>
             <div className='flex w-10/12 border-black border-2 rounded-lg p-2 '>
@@ -31,6 +32,7 @@ const Status = () => {
                 </div>
                 <div className='p-2'>
                   <p>Interviews Completed</p>
+                  <p >0</p>
                 </div>
             </div>
         </div>
