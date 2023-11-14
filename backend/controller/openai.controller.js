@@ -23,9 +23,10 @@ const jsInterviewPost = async (req, res) => {
          - If the candidate requests to end the interview, conclude the interview gracefully. Provide feedback along with the conclusion.
       
       4. **Evaluation:**
-         - After the fifth question, provide a rating out of 10 for two aspects: communication skills and subject matter expertise. For example:
-           "Communication Skills: [Rating out of 10]"
-           "Subject Matter Expertise: [Rating out of 10]"
+         - After the fifth question, provide a rating out of 10 for two aspects: communication skills, subject matter expertise and problem solving skills. For example:
+           "Communication Skills: [Single Number Rating out of 10]"
+           "Subject Matter Expertise: [Single Number Rating out of 10]"
+           "Problem Solving Skills: [Single Number Rating out of 10]"
       
       5. **Hiring Status:**
          - Finally, give a hiring status verdict. This could be one of the following:
@@ -33,7 +34,14 @@ const jsInterviewPost = async (req, res) => {
            - "Hire"
            - "Strong Hire"
       
-      Remember to simulate the interview process naturally, ask only one question at a time, and wait for the candidate to answer before moving to the next question. Let's start the interview!
+      Remember to simulate the interview process naturally, ask only one question at a time, and wait for the candidate to answer before moving to the next question.
+      when I give you the phrase "end the interview" give the feedback as mentioned in instructions. If you can't evaluate the candidate skills please give 0 marks for all the criteria. 
+      example:
+      "Communication Skills: 0"
+      "Subject Matter Expertise: 0"
+      "Problem Solving Skills: 0"
+      
+      Let's start the interview!
       
       `,
     });
@@ -125,6 +133,27 @@ const jsInterviewPatch = async (req, res) => {
         { new: true }
       );
 
+      const hasFeedback = gptMessage.content.includes("Communication Skills");
+
+      if (hasFeedback) {
+        const communication = parseInt(
+          gptMessage.content.match(/Communication Skills: (\d+)/)[1],
+          10
+        );
+        const subjectExpertise = parseInt(
+          gptMessage.content.match(/Subject Matter Expertise: (\d+)/)[1],
+          10
+        );
+        const problemSolving = parseInt(
+          gptMessage.content.match(/Problem Solving Skills: (\d+)/)[1],
+          10
+        );
+        await InterviewModel.findOneAndUpdate(
+          { _id: interviewId },
+          { communication, subjectExpertise, problemSolving }
+        );
+      }
+
       // Send response to the client
       res.status(200).json({
         status: "success",
@@ -162,9 +191,10 @@ const reactInterviewPost = async (req, res) => {
          - If the candidate requests to end the interview, conclude the interview gracefully. Provide feedback along with the conclusion.
       
       4. **Evaluation:**
-         - After the fifth question, provide a rating out of 10 for two aspects: communication skills and subject matter expertise. For example:
-           "Communication Skills: [Rating out of 10]"
-           "Subject Matter Expertise: [Rating out of 10]"
+         - After the fifth question, provide a rating out of 10 for two aspects: communication skills, subject matter expertise and problem solving skills. For example:
+         "Communication Skills: [Single Number Rating out of 10]"
+         "Subject Matter Expertise: [Single Number Rating out of 10]"
+         "Problem Solving Skills: [Single Number Rating out of 10]"
       
       5. **Hiring Status:**
          - Finally, give a hiring status verdict. This could be one of the following:
@@ -172,7 +202,14 @@ const reactInterviewPost = async (req, res) => {
            - "Hire"
            - "Strong Hire"
       
-      Remember to simulate the interview process naturally, ask only one question at a time, and wait for the candidate to answer before moving to the next question. Let's start the interview!
+      Remember to simulate the interview process naturally, ask only one question at a time, and wait for the candidate to answer before moving to the next question.
+      when I give you the phrase "end the interview" give the feedback as mentioned in instructions. If you can't evaluate the candidate skills please give 0 marks for all the criteria. 
+      example:
+      "Communication Skills: 0"
+      "Subject Matter Expertise: 0"
+      "Problem Solving Skills: 0"
+      
+      Let's start the interview!
       
       `,
     });
@@ -264,6 +301,27 @@ const reactInterviewPatch = async (req, res) => {
         { new: true }
       );
 
+      const hasFeedback = gptMessage.content.includes("Communication Skills");
+
+      if (hasFeedback) {
+        const communication = parseInt(
+          gptMessage.content.match(/Communication Skills: (\d+)/)[1],
+          10
+        );
+        const subjectExpertise = parseInt(
+          gptMessage.content.match(/Subject Matter Expertise: (\d+)/)[1],
+          10
+        );
+        const problemSolving = parseInt(
+          gptMessage.content.match(/Problem Solving Skills: (\d+)/)[1],
+          10
+        );
+        await InterviewModel.findOneAndUpdate(
+          { _id: interviewId },
+          { communication, subjectExpertise, problemSolving }
+        );
+      }
+
       // Send response to the client
       res.status(200).json({
         status: "success",
@@ -301,9 +359,10 @@ const nodeInterviewPost = async (req, res) => {
          - If the candidate requests to end the interview, conclude the interview gracefully. Provide feedback along with the conclusion.
       
       4. **Evaluation:**
-         - After the fifth question, provide a rating out of 10 for two aspects: communication skills and subject matter expertise. For example:
-           "Communication Skills: [Rating out of 10]"
-           "Subject Matter Expertise: [Rating out of 10]"
+         - After the fifth question, provide a rating out of 10 for two aspects: communication skills, subject matter expertise and problem solving skills. For example:
+         "Communication Skills: [Single Number Rating out of 10]"
+         "Subject Matter Expertise: [Single Number Rating out of 10]"
+         "Problem Solving Skills: [Single Number Rating out of 10]"
       
       5. **Hiring Status:**
          - Finally, give a hiring status verdict. This could be one of the following:
@@ -311,7 +370,14 @@ const nodeInterviewPost = async (req, res) => {
            - "Hire"
            - "Strong Hire"
       
-      Remember to simulate the interview process naturally, ask only one question at a time, and wait for the candidate to answer before moving to the next question. Let's start the interview!
+      Remember to simulate the interview process naturally, ask only one question at a time, and wait for the candidate to answer before moving to the next question.
+      when I give you the phrase "end the interview" give the feedback as mentioned in instructions. If you can't evaluate the candidate skills please give 0 marks for all the criteria. 
+      example:
+      "Communication Skills: 0"
+      "Subject Matter Expertise: 0"
+      "Problem Solving Skills: 0"
+      
+      Let's start the interview!
       
       `,
     });
@@ -403,6 +469,27 @@ const nodeInterviewPatch = async (req, res) => {
         { new: true }
       );
 
+      const hasFeedback = gptMessage.content.includes("Communication Skills");
+
+      if (hasFeedback) {
+        const communication = parseInt(
+          gptMessage.content.match(/Communication Skills: (\d+)/)[1],
+          10
+        );
+        const subjectExpertise = parseInt(
+          gptMessage.content.match(/Subject Matter Expertise: (\d+)/)[1],
+          10
+        );
+        const problemSolving = parseInt(
+          gptMessage.content.match(/Problem Solving Skills: (\d+)/)[1],
+          10
+        );
+        await InterviewModel.findOneAndUpdate(
+          { _id: interviewId },
+          { communication, subjectExpertise, problemSolving }
+        );
+      }
+
       // Send response to the client
       res.status(200).json({
         status: "success",
@@ -440,9 +527,10 @@ const fullstackInterviewPost = async (req, res) => {
          - If the candidate requests to end the interview, conclude the interview gracefully. Provide feedback along with the conclusion.
       
       4. **Evaluation:**
-         - After the fifth question, provide a rating out of 10 for two aspects: communication skills and subject matter expertise. For example:
-           "Communication Skills: [Rating out of 10]"
-           "Subject Matter Expertise: [Rating out of 10]"
+         - After the fifth question, provide a rating out of 10 for two aspects: communication skills, subject matter expertise and problem solving skills. For example:
+         "Communication Skills: [Single Number Rating out of 10]"
+         "Subject Matter Expertise: [Single Number Rating out of 10]"
+         "Problem Solving Skills: [Single Number Rating out of 10]"
       
       5. **Hiring Status:**
          - Finally, give a hiring status verdict. This could be one of the following:
@@ -450,7 +538,14 @@ const fullstackInterviewPost = async (req, res) => {
            - "Hire"
            - "Strong Hire"
       
-      Remember to simulate the interview process naturally, ask only one question at a time, and wait for the candidate to answer before moving to the next question. Let's start the interview!
+      Remember to simulate the interview process naturally, ask only one question at a time, and wait for the candidate to answer before moving to the next question.
+      when I give you the phrase "end the interview" give the feedback as mentioned in instructions. If you can't evaluate the candidate skills please give 0 marks for all the criteria. 
+      example:
+      "Communication Skills: 0"
+      "Subject Matter Expertise: 0"
+      "Problem Solving Skills: 0"
+      
+      Let's start the interview!
       
       `,
     });
@@ -542,6 +637,27 @@ const fullstackInterviewPatch = async (req, res) => {
         { new: true }
       );
 
+      const hasFeedback = gptMessage.content.includes("Communication Skills");
+
+      if (hasFeedback) {
+        const communication = parseInt(
+          gptMessage.content.match(/Communication Skills: (\d+)/)[1],
+          10
+        );
+        const subjectExpertise = parseInt(
+          gptMessage.content.match(/Subject Matter Expertise: (\d+)/)[1],
+          10
+        );
+        const problemSolving = parseInt(
+          gptMessage.content.match(/Problem Solving Skills: (\d+)/)[1],
+          10
+        );
+        await InterviewModel.findOneAndUpdate(
+          { _id: interviewId },
+          { communication, subjectExpertise, problemSolving }
+        );
+      }
+
       // Send response to the client
       res.status(200).json({
         status: "success",
@@ -559,67 +675,117 @@ const fullstackInterviewPatch = async (req, res) => {
   }
 };
 
-// const getUserInterviewData = async (req, res) => {
-//   const { userID } = req.body;
-//   try {
-//     // Step 1: Count the number of interviews for each type
-//     const interviewCounts = await InterviewModel.aggregate([
-//       { $match: { userId: mongoose.Types.ObjectId(userID) } },
-//       {
-//         $group: {
-//           _id: "$type",
-//           count: { $sum: 1 },
-//         },
-//       },
-//     ]);
+const getUserInterviewData = async (req, res) => {
+  const { userID } = req.body;
+  try {
+    const userInterviews = await InterviewModel.find({userId: userID});
 
-//     // Step 2: Calculate the average scores for each type
-//     const averageScores = await InterviewModel.aggregate([
-//       { $match: { userId: mongoose.Types.ObjectId(userID) } },
-//       {
-//         $group: {
-//           _id: "$type",
-//           averageCommunication: { $avg: "$communication" },
-//           averageSubjectExpertise: { $avg: "$subjectExpertise" },
-//         },
-//       },
-//     ]);
+    const userTotalInterviews = userInterviews.length;
 
-//     // Step 3: Retrieve details about all interviews for the specified user
-//     const allInterviews = await InterviewModel.find({
-//       userId: mongoose.Types.ObjectId(userID),
-//     });
+    // Function to calculate average marks for communication and subject expertise
+    const calculateAverages = (interviews) => {
+      const totalCount = interviews.length;
+      const totalCommunicationMarks = interviews.reduce(
+        (acc, interview) => acc + interview.communication,
+        0
+      );
+      const totalSubjectExpertiseMarks = interviews.reduce(
+        (acc, interview) => acc + interview.subjectExpertise,
+        0
+      );
+      const totalProblemSolvingMarks = interviews.reduce(
+        (acc, interview) => acc + interview.problemSolving,
+        0
+      );
 
-//     // Format the data as needed and send it to the front end
-//     const result = {
-//       interviewCounts: interviewCounts.reduce((acc, val) => {
-//         acc[val._id] = val.count;
-//         return acc;
-//       }, {}),
-//       averageScores: averageScores.reduce((acc, val) => {
-//         acc[val._id] = {
-//           communication: val.averageCommunication,
-//           subjectExpertise: val.averageSubjectExpertise,
-//         };
-//         return acc;
-//       }, {}),
-//       interviewDetails: allInterviews,
-//     };
+      const avgCommunication =
+        totalCount > 0 ? totalCommunicationMarks / totalCount : 0;
+      const avgSubjectExpertise =
+        totalCount > 0 ? totalSubjectExpertiseMarks / totalCount : 0;
+      const avgProblemSolving =
+        totalCount > 0 ? totalProblemSolvingMarks / totalCount : 0;
 
-//     res.status(200).json({
-//       status: "success",
-//       message: "Entire data retrieved successfully",
-//       data: {
-//         result,
-//       },
-//     });
-//   } catch (err) {
-//     res.status(500).json({
-//       status: "fail",
-//       message: err.message,
-//     });
-//   }
-// };
+      return {
+        count: totalCount,
+        userTotalInterviews,
+        avgCommunication,
+        avgSubjectExpertise,
+        avgProblemSolving,
+        communicationScores: interviews.map(
+          (interview) => interview.communication
+        ),
+        subjectExpertiseScores: interviews.map(
+          (interview) => interview.subjectExpertise
+        ),
+        problemSolvingScores: interviews.map(
+          (interview) => interview.problemSolving
+        ),
+      };
+    };
+
+    // Function to collect interview conversations
+    const collectInterviewConversations = (interviews) => {
+      return {
+        conversations: interviews.map((interview) => interview.chatHistory),
+      };
+    };
+
+    // Count and collect data for JavaScript interviews
+    const javascriptInterviews = await InterviewModel.find({
+      type: "javascript",
+      userId: userID,
+    });
+    const javascriptData = {
+      ...calculateAverages(javascriptInterviews),
+      // ...collectInterviewConversations(javascriptInterviews),
+    };
+
+    // Count and collect data for React interviews
+    const reactInterviews = await InterviewModel.find({
+      type: "react",
+      userId: userID,
+    });
+    const reactData = {
+      ...calculateAverages(reactInterviews),
+      // ...collectInterviewConversations(reactInterviews),
+    };
+
+    // Count and collect data for Node interviews
+    const nodeInterviews = await InterviewModel.find({
+      type: "node",
+      userId: userID,
+    });
+    const nodeData = {
+      ...calculateAverages(nodeInterviews),
+      // ...collectInterviewConversations(nodeInterviews),
+    };
+
+    // Count and collect data for Full Stack interviews
+    const fullStackInterviews = await InterviewModel.find({
+      type: "fullstack",
+      userId: userID,
+    });
+    const fullStackData = {
+      ...calculateAverages(fullStackInterviews),
+      // ...collectInterviewConversations(fullStackInterviews),
+    };
+
+    // Collect all interviews data
+    const allInterviews = {
+      javascriptData,
+      reactData,
+      nodeData,
+      fullStackData,
+    };
+
+    res.status(200).json({
+      allInterviews,
+    });
+  } catch (error) {
+    console.error("Error fetching interviews data:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};
 
 module.exports = {
   jsInterviewPost,
@@ -630,5 +796,5 @@ module.exports = {
   nodeInterviewPatch,
   fullstackInterviewPost,
   fullstackInterviewPatch,
-  // getUserInterviewData,
+  getUserInterviewData,
 };
