@@ -4,7 +4,7 @@ const { UserModel } = require("../models/user.model");
 const { BlackListModel } = require("../models/blacklist.model");
 
 const userRegister = async (req, res) => {
-  const { username, email, password } = req.body;
+  const { username, email, password,avatar } = req.body;
 
   try {
     // Check if the user already exists
@@ -24,6 +24,7 @@ const userRegister = async (req, res) => {
       username,
       email,
       password: hashedPassword, // Save the hashed password
+      avatar
     });
 
     // Save the new user to the database
