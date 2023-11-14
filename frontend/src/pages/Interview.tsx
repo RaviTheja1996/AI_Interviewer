@@ -66,7 +66,7 @@ const Interview = () => {
         }
         let iid = res.data.data.interviewDetails._id;
         console.log(iid);
-        dispatch({type: "INTERVIEW_ID", paylaod: iid});
+        dispatch({type: "INTERVIEW_ID", payload: iid});
         console.log(res);
       })
       .catch((err)=>{
