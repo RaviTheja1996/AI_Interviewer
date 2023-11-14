@@ -1,13 +1,15 @@
 import React from 'react'
 import Card from './Card'
 import Card2 from './Card2'
+import Card3 from './Card3'
 
 const Myinterviews = () => {
   return (
     <div>
         <div>
             <h1 className='text-3xl'>My Interviews</h1>
-             <Card2/>
+             {/* <Card2/> */}
+             <Card3/>
         </div>
         {/* <div className='grid grid-cols-3 mt-2 w-5/12'> */}
             {/* <div >

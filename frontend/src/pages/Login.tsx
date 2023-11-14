@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 // import {login} from "../redux/action.ts";
 import { useDispatch } from "react-redux";
-import { loginuserCredentials } from "../redux/action";
-import { LOGINERROR, LOGINREQUEST, LOGINSUCCESSFUL } from "../redux/actionType";
+import { loginuserCredentials } from "../redux/Authentication/action";
+import { LOGINERROR, LOGINREQUEST, LOGINSUCCESSFUL } from "../redux/Authentication/actionType";
 import axios from "axios";
 import Cookies from "js-cookie" ;
 
