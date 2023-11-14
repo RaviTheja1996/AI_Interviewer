@@ -678,6 +678,10 @@ const fullstackInterviewPatch = async (req, res) => {
 const getUserInterviewData = async (req, res) => {
   const { userID } = req.body;
   try {
+    const userInterviews = await InterviewModel.find({userId: userID});
+
+    const userTotalInterviews = userInterviews.length;
+
     // Function to calculate average marks for communication and subject expertise
     const calculateAverages = (interviews) => {
       const totalCount = interviews.length;
@@ -703,6 +707,7 @@ const getUserInterviewData = async (req, res) => {
 
       return {
         count: totalCount,
+        userTotalInterviews,
         avgCommunication,
         avgSubjectExpertise,
         avgProblemSolving,

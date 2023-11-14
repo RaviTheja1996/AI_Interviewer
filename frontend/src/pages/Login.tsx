@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import {login} from "../redux/action.ts";
+import {useDispatch} from "react-redux";
 
 const Login = () => {
+  const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -25,6 +29,8 @@ const Login = () => {
     }else{
       alert("PASSWORDS-MISMATCH");
     }
+
+    dispatch(login(payload));
     
     console.log("Form submitted with data:", formData);
   };
