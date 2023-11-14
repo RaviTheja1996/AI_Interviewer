@@ -130,7 +130,7 @@ const jsInterviewPatch = async (req, res) => {
         status: "success",
         message: "Chat message processed successfully",
         data: {
-          chatMessages: interview.chatHistory,
+          chatHistory: interview.chatHistory,
         },
       });
     }
@@ -269,7 +269,7 @@ const reactInterviewPatch = async (req, res) => {
         status: "success",
         message: "Chat message processed successfully",
         data: {
-          chatMessages: interview.chatHistory,
+          chatHistory: interview.chatHistory,
         },
       });
     }
@@ -408,7 +408,7 @@ const nodeInterviewPatch = async (req, res) => {
         status: "success",
         message: "Chat message processed successfully",
         data: {
-          chatMessages: interview.chatHistory,
+          chatHistory: interview.chatHistory,
         },
       });
     }
@@ -547,14 +547,14 @@ const fullstackInterviewPatch = async (req, res) => {
         status: "success",
         message: "Chat message processed successfully",
         data: {
-          chatMessages: interview.chatHistory,
+          chatHistory: interview.chatHistory,
         },
       });
     }
   } catch (err) {
     res.status(500).json({
       status: "fail",
-      message: err.message,
+      message: err.message
     });
   }
 };

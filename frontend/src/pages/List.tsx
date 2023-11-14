@@ -45,7 +45,7 @@ const List = () => {
               <li className='flex items-center gap-3 text-gray-900 dark:text-white'><FaCircleCheck className=' text-green-500'/>Reducers</li>
               <li className='flex items-center gap-3 text-gray-900 dark:text-white'><FaCircleCheck className=' text-green-500'/>Redux</li>
             </ol>
-            <button onClick={()=> {navigate("/interview/mongodb")}} className='text-lg rounded-3xl bg-white w-[70%] p-2 dark:text-gray-900 text-white'>Start</button>
+            <button onClick={()=> {navigate("/interview/javascript")}} className='text-lg rounded-3xl bg-white w-[70%] p-2 dark:text-gray-900 text-white'>Start</button>
           </div>
         </div>
       </div>
