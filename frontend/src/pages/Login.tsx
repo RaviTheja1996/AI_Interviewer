@@ -1,11 +1,17 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { loginuserCredentials } from "../redux/action";
+import { LOGINERROR, LOGINREQUEST, LOGINSUCCESSFUL } from "../redux/actionType";
+import axios from "axios";
+import Cookies from "js-cookie" ;
 
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    confirmPassword: "",
   });
+
+  const dispatch = useDispatch();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -16,19 +22,24 @@ const Login = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    let payload = {}
-    if(formData.password === formData.confirmPassword){
-      payload = {
-        email : formData.email,
-        password : formData.password
-      }
-    }else{
-      alert("PASSWORDS-MISMATCH");
+    let payload: loginuserCredentials = {
+      email: formData.email,
+      password: formData.password,
+    };
+
+    dispatch({ type: LOGINREQUEST });
+    try {
+      axios.post("http://localhost:4500/user/login", payload).then((res) => {
+        dispatch({ type: LOGINSUCCESSFUL }); // i have to send user.data
+        console.log(res.data.data.token);
+      Cookies.set( "token" , res.data.data.token)
+      }); // i have to change the link aswell
+    } catch (error) {
+      dispatch({ type: LOGINERROR });
     }
-    
+
     console.log("Form submitted with data:", formData);
   };
-
 
   return (
     <div className="bg-gray-50 dark:bg-gray-900 h-screen">
@@ -85,24 +96,6 @@ const Login = () => {
                     name="password"
                     id="password"
                     value={formData.password}
-                    onChange={handleChange}
-                    placeholder="••••••••"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    required
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="confirm-password"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Confirm password
-                  </label>
-                  <input
-                    type="password"
-                    name="confirm-password"
-                    id="confirm-password"
-                    value={formData.confirmPassword}
                     onChange={handleChange}
                     placeholder="••••••••"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
