@@ -178,8 +178,8 @@ const Interview = () => {
   };
 
   return (
-    <div className='bg-gray-900'>
-      <div></div>
+    <div className='bg-gray-900 relative'>
+      {isLoadingInitial && <div className='w-full h-[100vh] bg-white bg-opacity-30 absolute flex justify-center items-center'><h1 className='text-3xl '>Loading...</h1></div>}
 
       <div className='text-center'><h1 className='text-white text-3xl py-5'>Welcome to {module} interview</h1></div>
 
