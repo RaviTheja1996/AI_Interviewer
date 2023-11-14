@@ -7,7 +7,7 @@ function App() {
   return (
    <div>
       <Navbar2/>
-     <AllRoutes/>
+      <AllRoutes/>
    </div>
   );
 }

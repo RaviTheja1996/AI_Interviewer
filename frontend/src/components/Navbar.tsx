@@ -37,7 +37,7 @@ const Navbar = () => {
     return (
         <>
           <div className="min-h-full">
-            <Disclosure as="nav" className={"bgcolor-[black]"} >
+          <Disclosure as="nav" className="bg-white border-b border-gray-400 lg:flex lg:items-center lg:justify-between p-4">
               {({ open }) => (
                 <>
                   <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
