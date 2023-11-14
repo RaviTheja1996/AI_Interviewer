@@ -1,8 +1,14 @@
+import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
 
 const Signup = () => {
+
+  const navigate = useNavigate()
+
   const [formData, setFormData] = useState({
-    name: "",
+    username: "",
+    avatar : "",
     email: "",
     password: "",
   });
@@ -18,10 +24,19 @@ const Signup = () => {
     e.preventDefault();
 
     console.log("Form submitted with data:", formData);
+
+    try {
+      axios.post("http://localhost:4500/user/register", formData).then((res) => {
+        console.log(res)
+        navigate("/login");
+      }); 
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
-    <div className="bg-gray-50 dark:bg-gray-900 h-screen p-10">
+    <div className="bg-gray-50 dark:bg-gray-900 h-full p-10">
       <section className="bg-gray-50 dark:bg-gray-900">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <a
@@ -47,19 +62,37 @@ const Signup = () => {
               >
                 <div>
                   <label
-                    htmlFor="name"
+                    htmlFor="username"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Your Name
                   </label>
                   <input
                     type="text"
-                    name="name"
-                    id="name"
-                    value={formData.name}
+                    name="username"
+                    id="username"
+                    value={formData.username}
                     onChange={handleChange}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Name Surname"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    Your Avatar
+                  </label>
+                  <input
+                    type="text"
+                    name="avatar"
+                    id="avatar"
+                    value={formData.avatar}
+                    onChange={handleChange}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="https://avatar.url"
                     required
                   />
                 </div>
