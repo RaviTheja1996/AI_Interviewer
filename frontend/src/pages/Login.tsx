@@ -1,14 +1,10 @@
 import React, { useState } from "react";
-<<<<<<< HEAD
 import {login} from "../redux/action.ts";
-import {useDispatch} from "react-redux";
-=======
 import { useDispatch } from "react-redux";
 import { loginuserCredentials } from "../redux/action";
 import { LOGINERROR, LOGINREQUEST, LOGINSUCCESSFUL } from "../redux/actionType";
 import axios from "axios";
 import Cookies from "js-cookie" ;
->>>>>>> c877744996f1c12f74b00ee7e3b40c5172f813e3
 
 const Login = () => {
   const dispatch = useDispatch();
