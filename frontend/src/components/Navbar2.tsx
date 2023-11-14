@@ -29,7 +29,7 @@ function classNames(...classes: (string | boolean)[]): string {
 const navigation: NavigationItem[] = [
   { name: 'Home', href: '/', current: false },  
   { name: 'Dashboard', href:'/dashboard', current: false },
-  { name: 'Interviews', href: '/interviews', current: false },
+  // { name: 'Interviews', href: '/interviews', current: false },
   { name: 'Lists', href: '/list', current: false },
 
 ];
@@ -39,7 +39,7 @@ export default function Navbar2() {
   const token: string | undefined = Cookies.get("token") || undefined;
 
   return (
-    <Disclosure as="nav" className="bg-gray-800 h-14">
+    <Disclosure as="nav" className="bg-gray-800 h-14 z-100">
       {({ open }: { open: boolean }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">

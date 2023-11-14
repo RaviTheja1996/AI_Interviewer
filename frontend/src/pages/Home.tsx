@@ -74,11 +74,10 @@ const Home: React.FC = () => {
         <h2 className="text-2xl font-bold mb-4 text-white text-center">Testimonials</h2>
         <Slider {...settings}>
           <Testimonial
-            name="John Doe"
+            name="Alexendaria"
             position="Software Engineer"
             text="Interview AI has been an invaluable resource for my interview preparation. The Real Interviewer AI feature provides a realistic experience, and the feedback is incredibly helpful."
-            image="https://assets.nicepagecdn.com/11a8ddce/96126/images/pexels-photo-555790.jpg"
-          />
+            image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTREGxaTu-41aJR5JzaqH3smZQ0BE82n50cMikGkJw-AohpSHfwKZ0alFxYNXWFgInNRek&usqp=CAU"          />
           <Testimonial
             name="Jane Smith"
             position="Full Stack Developer"
@@ -89,7 +88,7 @@ const Home: React.FC = () => {
             name="Alex Rodriguez"
             position="Software Engineer"
             text="Interview AI is a must-have tool for every software engineer. The real-time coding environment and detailed feedback have been invaluable in refining my coding skills. I highly recommend it to anyone serious about acing technical interviews."
-            image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTREGxaTu-41aJR5JzaqH3smZQ0BE82n50cMikGkJw-AohpSHfwKZ0alFxYNXWFgInNRek&usqp=CAU"
+            image="https://assets.nicepagecdn.com/11a8ddce/96126/images/pexels-photo-555790.jpg"
            />
            <Testimonial
             name="Sarah Chang"
