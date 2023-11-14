@@ -5,6 +5,8 @@ import axios from "axios";
 // import { Modal } from "./Modal";
 import {BsLaptop} from "react-icons/bs"
 import { Link } from 'react-router-dom';
+import Cookies from "js-cookie"
+
 interface Course {
   id: number;
   title: string;
@@ -14,6 +16,10 @@ interface Course {
 const Card2 = () => {
 //   const toast = useToast();
   const dispatch = useDispatch();
+
+  const [data,setData] = useState([])
+
+
 //   const isAuth: boolean = useSelector(
 //     (store: RootState) => store.authReducer.isAuth
 //   );
@@ -39,6 +45,21 @@ const Card2 = () => {
   const closeModal = (): void => {
     setIsModalOpen(false);
   };
+
+ 
+  
+
+  try {
+    axios.get("http://localhost:4500/interview/",{
+      headers:{
+        Authorization: `Bearer ${Cookies.get("token")}`
+      }
+    }).then((res) => { // i have to send user.data
+     setData(res.data.allInterviews)
+    }); // i have to change the link aswell
+  } catch (error) {
+    console.log(error)
+  }
 
 //   const startInterview = async (type: any, toast: any, navigate: any) => {
 //     dispatch({ type: POST_STARTINTERVIEW_LOADING });
@@ -67,12 +88,12 @@ const Card2 = () => {
   const allCourses: Course[] = [
     { id: 1, title: 'NEM111', description: 'General1' },
     { id: 2, title: 'NEM 111', description: 'General' },
-    { id: 2, title: 'NEM 111', description: 'General' },
-    { id: 2, title: 'NEM 111', description: 'General' },
-    { id: 2, title: 'NEM 111', description: 'General' },
-    { id: 2, title: 'NEM 111', description: 'General' },
-    { id: 2, title: 'NEM 111', description: 'General' },
-    { id: 2, title: 'NEM 111', description: 'General' },
+    { id: 3, title: 'NEM 111', description: 'General' },
+    { id: 4, title: 'NEM 111', description: 'General' },
+    { id: 5, title: 'NEM 111', description: 'General' },
+    { id: 6, title: 'NEM 111', description: 'General' },
+    { id: 7, title: 'NEM 111', description: 'General' },
+    { id: 8, title: 'NEM 111', description: 'General' },
     // Add more courses as needed
   ];
 
