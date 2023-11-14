@@ -670,7 +670,7 @@ const fullstackInterviewPatch = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       status: "fail",
-      message: err.message,
+      message: err.message
     });
   }
 };
