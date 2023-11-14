@@ -18,7 +18,7 @@ const Home: React.FC = () => {
   return (
     <div className="bg-gray-800 min-h-screen flex flex-col items-center justify-center">
       {/* AI Interviewer Section */}
-      <div className="w-full p-8  shadow-md rounded-md text-white mb-6 flex flex-col items-center">
+      <div className="w-full p-8   rounded-md text-white mb-6 flex flex-col items-center">
         {/* <div className="mb-6">
           <img
             src="https://huru.ai/wp-content/uploads/2023/05/HURU-LOGO.webp"
