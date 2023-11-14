@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+// import {login} from "../redux/action.ts";
 import { useDispatch } from "react-redux";
 import { loginuserCredentials } from "../redux/Authentication/action";
 import { LOGINERROR, LOGINREQUEST, LOGINSUCCESSFUL } from "../redux/Authentication/actionType";
@@ -6,12 +7,12 @@ import axios from "axios";
 import Cookies from "js-cookie" ;
 
 const Login = () => {
+  const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-
-  const dispatch = useDispatch();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
