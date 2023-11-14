@@ -3,12 +3,14 @@
 const initialState = {
     isLoadingNextQuestion: false,
     isLoadingInitial: false,
-    isErrorInitial: false
+    isErrorInitial: false,
+    interviewId: ""
 }
 interface AiInit {
     isLoadingNextQuestion: boolean,
     isLoadingInitial: boolean,
-    isErrorInitial: boolean
+    isErrorInitial: boolean,
+    interviewId: string
 }
 
 interface ActionObj {
@@ -30,6 +32,10 @@ export const aiReducer = (state: AiInit = initialState, {type, payload}:ActionOb
         case "INITIAL_LOAD_FAIL": return {
             ...state,
             isLoadingInitial: false
+        }
+        case "INTERVIEW_ID": return {
+            ...state,
+            interviewId: payload
         }
         default: return state
     }

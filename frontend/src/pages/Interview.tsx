@@ -3,13 +3,15 @@ import React, {useRef, useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import dotenv from 'dotenv';
+import Cookies from 'js-cookie';
 // dotenv.config();
 const burl = process.env.REACT_APP_BACKEND_URL;
 
 interface Reducer {
   isLoadingNextQuestion: boolean,
   isLoadingInitial: boolean,
-  isErrorInitial: boolean
+  isErrorInitial: boolean,
+  interviewId: string
 }
 
 interface Store {
@@ -33,11 +35,12 @@ const Interview = () => {
   //Speech functionalities
   const {module} = useParams();
 
-  const {isLoadingNextQuestion, isLoadingInitial, isErrorInitial} = useSelector((store:Store ) => {
+  const {isLoadingNextQuestion, isLoadingInitial, isErrorInitial, interviewId} = useSelector((store:Store ) => {
     return {
       isLoadingNextQuestion: store.aiReducer.isLoadingNextQuestion,
       isLoadingInitial: store.aiReducer.isLoadingInitial,
-      isErrorInitial: store.aiReducer.isErrorInitial
+      isErrorInitial: store.aiReducer.isErrorInitial,
+      interviewId: store.aiReducer.interviewId
     }
   });
   const dispatch = useDispatch();
@@ -52,7 +55,7 @@ const Interview = () => {
       dispatch({type: "INITIAL_LOAD_REQ"})
       axios.post(`${burl}/interview/${module}`, {}, {
         headers: {
-          "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhhcnNoIiwidXNlcklEIjoiNjU1MmRkMzQxYTNjYWNkMzA2MmNjZmZmIiwiaWF0IjoxNjk5OTI5NDc3LCJleHAiOjE3MDA1MzQyNzd9.gGYk80pJfk-bAPwgmFKrFsZrHG-YqxUlGOUYMk1RWJw"
+          "Authorization": `Bearer ${Cookies.get("token")}`
         }
       })
       .then((res)=>{
@@ -61,6 +64,9 @@ const Interview = () => {
         if (latestMessage.role === "assistant") {
           handleTextToSpeech(latestMessage.content);
         }
+        let iid = res.data.data.interviewDetails._id;
+        console.log(iid);
+        dispatch({type: "INTERVIEW_ID", paylaod: iid});
         console.log(res);
       })
       .catch((err)=>{
@@ -82,7 +88,6 @@ const Interview = () => {
           event.results[event.results.length - 1][0].transcript;
         setUserContent((prevContent) => prevContent + transcript);
       };
-
       setRecognition(recognition);
     };
 
@@ -91,6 +96,7 @@ const Interview = () => {
   }, [])
 
   const handleStart = () => {
+    console.log(interviewId)
     if (recognition) {
       recognition.start();
       setStartRecording(true);
@@ -109,13 +115,12 @@ const Interview = () => {
     try {
       const response = await axios.patch(`http://localhost:4500/interview/${module}`,
       {
-        interviewId: "65531dad1a3cacd3062cd0d3",
+        interviewId: interviewId,
         userReply: userContent,
       },
       {
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhhcnNoIiwidXNlcklEIjoiNjU1MmRkMzQxYTNjYWNkMzA2MmNjZmZmIiwiaWF0IjoxNjk5OTI5NDc3LCJleHAiOjE3MDA1MzQyNzd9.gGYk80pJfk-bAPwgmFKrFsZrHG-YqxUlGOUYMk1RWJw",
+          Authorization: `Bearer ${Cookies.get("token")}`
         },
       }
       );
