@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {login} from "../redux/action.ts";
+// import {login} from "../redux/action.ts";
 import { useDispatch } from "react-redux";
 import { loginuserCredentials } from "../redux/action";
 import { LOGINERROR, LOGINREQUEST, LOGINSUCCESSFUL } from "../redux/actionType";
@@ -13,8 +13,6 @@ const Login = () => {
     email: "",
     password: "",
   });
-
-  const dispatch = useDispatch();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
