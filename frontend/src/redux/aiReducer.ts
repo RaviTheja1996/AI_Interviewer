@@ -4,13 +4,15 @@ const initialState = {
     isLoadingNextQuestion: false,
     isLoadingInitial: false,
     isErrorInitial: false,
-    interviewId: ""
+    interviewId: "",
+    chatHistory: []
 }
 interface AiInit {
     isLoadingNextQuestion: boolean,
     isLoadingInitial: boolean,
     isErrorInitial: boolean,
-    interviewId: string
+    interviewId: string,
+    chatHistory: string[]
 }
 
 interface ActionObj {
@@ -36,6 +38,10 @@ export const aiReducer = (state: AiInit = initialState, {type, payload}:ActionOb
         case "INTERVIEW_ID": return {
             ...state,
             interviewId: payload
+        }
+        case "CHAT_ARRAY": return {
+            ...state,
+            chatHistory: payload
         }
         default: return state
     }
