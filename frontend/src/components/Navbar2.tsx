@@ -1,6 +1,7 @@
 import { Fragment, ReactNode } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { useDispatch } from "react-redux";
 import Cookies from "js-cookie"
 
 interface NavigationItem {
@@ -35,6 +36,9 @@ const navigation: NavigationItem[] = [
 ];
 
 export default function Navbar2() {
+
+  const dispatch = useDispatch();
+  
 
   const token: string | undefined = Cookies.get("token") || undefined;
 
@@ -98,7 +102,7 @@ export default function Navbar2() {
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
                 </button> */}
                 <div>
-                  <p className='text-white'>Hello, Suriya</p>
+                  {/* <p className='text-white'>Hello, Suriya</p> */}
                 </div>
 
                 {/* Profile dropdown */}
@@ -129,7 +133,7 @@ export default function Navbar2() {
       <Menu.Item>
         {({ active }: MenuItemsProps) => (
           <a
-            href="/profile"
+            href="/"
             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
           >
             Your Profile
