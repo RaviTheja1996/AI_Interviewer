@@ -108,23 +108,29 @@ const Card3 = () => {
         <div className='flex items-center p-2 pl-0'>
           <img className="w-12" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMnB4IiBoZWlnaHQ9IjMycHgiIGZpbGw9IiM2RTU1QjciIHZpZXdCb3g9IjAgMCAyNTYgMjU2Ij48cGF0aCBkPSJNMjE2LDcyVjE3Nkg0MFY3MkExNiwxNiwwLDAsMSw1Niw1NkgyMDBBMTYsMTYsMCwwLDEsMjE2LDcyWiIgb3BhY2l0eT0iMC4yIi8+PHBhdGggZD0iTTIzMiwxNjhoLThWNzJhMjQsMjQsMCwwLDAtMjQtMjRINTZBMjQsMjQsMCwwLDAsMzIsNzJ2OTZIMjRhOCw4LDAsMCwwLTgsOHYxNmEyNCwyNCwwLDAsMCwyNCwyNEgyMTZhMjQsMjQsMCwwLDAsMjQtMjRWMTc2QTgsOCwwLDAsMCwyMzIsMTY4Wk00OCw3MmE4LDgsMCwwLDEsOC04SDIwMGE4LDgsMCwwLDEsOCw4djk2SDQ4Wk0yMjQsMTkyYTgsOCwwLDAsMS04LDhINDBhOCw4LDAsMCwxLTgtOHYtOEgyMjRaTTE1Miw4OGE4LDgsMCwwLDEtOCw4SDExMmE4LDgsMCwwLDEsMC0xNmgzMkE4LDgsMCwwLDEsMTUyLDg4WiIvPjwvc3ZnPg=="
           />
-          <h3 className="text-xl font-semibold ml-3">Interviewer: {index + 1}</h3>
+          <h3 className="text-xl font-semibold ml-3">Interview: {index + 1}</h3>
         </div>
-        <p>General</p>
-        <div className=' w-44 flex items-center justify-between p-2 pl-0'>
-          <div>Score: {score}</div>
+        {/* <p>General</p> */}
+        <div className=' w-44 flex items-center justify-between  pl-0'>
+          <div>Communication: {score}</div>
+        </div>
+        <div>
+        <p>Problemsolving : {courses.problemSolvingScores[index]} </p>
+        </div>
+        <div>
+        <p>Subject Expertise : {courses.subjectExpertiseScores[index]} </p>
         </div>
         {/* {courses.problemSolvingScores.map((problemScore, problemIndex) => (
           <div key={problemIndex}>
             <p>Problemsolving: {problemScore}</p>
           </div>
-        ))}
-        {courses.subjectExpertiseScores.map((problemScore, problemIndex) => (
+        ))} */}
+        {/* {courses.subjectExpertiseScores.map((problemScore, problemIndex) => (
           <div key={problemIndex}>
             <p>SubjectExpertise: {problemScore}</p>
           </div>
         ))} */}
-        <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 mt-2 focus:outline-none" onClick={() => openModal({
+        <button className="bg-blue-500 text-white px-4 py-2 mt-4 rounded hover:bg-blue-700 mt-2 focus:outline-none" onClick={() => openModal({
           communicationScores: courses.communicationScores,
           problemSolvingScores: courses.problemSolvingScores,
           subjectExpertiseScores: courses.subjectExpertiseScores,
@@ -163,7 +169,7 @@ const Card3 = () => {
         </div>
       </div>
 
-      {isModalOpen && (
+      {/* {isModalOpen && (
         <div className="modal">
           <div className="modal-content">
             <span className="close" onClick={closeModal}>&times;</span>
@@ -174,7 +180,7 @@ const Card3 = () => {
             <p>Total Interviews: {selectedInterview?.userTotalInterviews}</p>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

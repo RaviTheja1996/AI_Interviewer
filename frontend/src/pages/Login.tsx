@@ -5,10 +5,12 @@ import { loginuserCredentials } from "../redux/Authentication/action";
 import { LOGINERROR, LOGINREQUEST, LOGINSUCCESSFUL } from "../redux/Authentication/actionType";
 import axios from "axios";
 import Cookies from "js-cookie" ;
+import { useNavigate } from "react-router";
+
 
 const Login = () => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -34,6 +36,7 @@ const Login = () => {
         dispatch({ type: LOGINSUCCESSFUL }); // i have to send user.data
         console.log(res.data.data.token);
       Cookies.set( "token" , res.data.data.token)
+      navigate("/")
       }); // i have to change the link aswell
     } catch (error) {
       dispatch({ type: LOGINERROR });

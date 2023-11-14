@@ -3,6 +3,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useDispatch } from "react-redux";
 import Cookies from "js-cookie"
+import axios from 'axios';
 
 interface NavigationItem {
   name: string;
@@ -38,6 +39,20 @@ const navigation: NavigationItem[] = [
 export default function Navbar2() {
 
   const dispatch = useDispatch();
+
+  const handleLogout = ()=>{
+   let tokenTemp:String | undefined = Cookies.get("token");
+    Cookies.remove("token");
+
+   axios.get("http://localhost:4500/user/logout",{
+    headers:{
+      Authorization : `Bearer ${tokenTemp}`
+    }
+   }).then((res)=>{
+    console.log(res.data);
+   }).catch((err)=> console.log(err))
+
+  }
   
 
   const token: string | undefined = Cookies.get("token") || undefined;
@@ -145,6 +160,7 @@ export default function Navbar2() {
           <a
             href="/register"  // Change href to the logout endpoint or path
             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+            onClick={handleLogout}
           >
             Sign out
           </a>
