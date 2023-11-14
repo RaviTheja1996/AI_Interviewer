@@ -1,10 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
+import Status from '../components/Status';
+import Myinterviews from '../components/Myinterviews';
+import Cookies from "js-cookie";
+import { FaHome,FaUser,FaBriefcase,FaSignOutAlt } from 'react-icons/fa';
+import {BiSolidDashboard,BiLogIn} from "react-icons/bi"
 
 interface Props {}
 
 const Dashboard: React.FC<Props> = () => {
   const [isUserMenuOpen, setUserMenuOpen] = useState(false);
   const userMenuButtonRef = useRef<HTMLButtonElement | null>(null);
+  const token: string | undefined = Cookies.get("token") || undefined;
+
 
   const toggleUserMenu = () => {
     setUserMenuOpen(!isUserMenuOpen);
@@ -33,8 +40,8 @@ const Dashboard: React.FC<Props> = () => {
   }, [isUserMenuOpen]);
 
   return (
-    <div>
-      <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+    <div className='bg-gray-800 text-white'>
+      <nav className="fixed top-0 z-50 w-full bg-gray-800 border-b border-gray-600 dark:bg-gray-800 dark:border-gray-700">
         <div className="px-3 py-3 lg:px-5 lg:pl-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center justify-start rtl:justify-end">
@@ -43,7 +50,7 @@ const Dashboard: React.FC<Props> = () => {
                 data-drawer-toggle="logo-sidebar"
                 aria-controls="logo-sidebar"
                 type="button"
-                className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                className="inline-flex items-center p-2 text-sm rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 text-white dark:hover:bg-gray-700 dark:focus:ring-gray-600"
               >
                 <span className="sr-only">Open sidebar</span>
                 <svg
@@ -66,7 +73,7 @@ const Dashboard: React.FC<Props> = () => {
                   className="h-8 me-3"
                   alt="FlowBite Logo"
                 />
-                <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
+                <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-white">
                   AI Interviewer
                 </span>
               </a>
@@ -85,7 +92,7 @@ const Dashboard: React.FC<Props> = () => {
                     <img
                       className="w-8 h-8 rounded-full"
                       src="https://img.freepik.com/premium-photo/memoji-happy-man-white-background-emoji_826801-6840.jpg?size=338&ext=jpg&ga=GA1.1.1826414947.1698883200&semt=ais"
-                      alt="user photo"
+                      alt="img"
                     />
                   </button>
                 </div>
@@ -129,17 +136,17 @@ const Dashboard: React.FC<Props> = () => {
   
       <aside
         id="logo-sidebar"
-        className="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+        className="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full  border-r border-gray-600 sm:translate-x-0 bg-gray-800 text-white"
         aria-label="Sidebar"
       >
-        <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
+        <div className="h-full px-3 pb-4 overflow-y-auto  bg-gray-800 text-white">
           <ul className="space-y-2 font-medium">
           <li>
               <a
                 href="/"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                className="flex items-center p-2 text-gray-200 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group hover:text-black"
               >
-                  <svg
+                  {/* <svg
       className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
       fill="none"
       stroke="currentColor"
@@ -152,16 +159,17 @@ const Dashboard: React.FC<Props> = () => {
         strokeWidth="2"
         d="M3 3v10a3 3 0 003 3h5v5a1 1 0 001.7.7l7-7a1 1 0 000-1.4l-7-7A1 1 0 0011 1H6a3 3 0 00-3 3z"
       ></path>
-    </svg>
+    </svg> */}
+    <FaHome/>
                 <span className="ml-2">Home</span>
               </a>
             </li>
             <li>
               <a
-                href="#"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                href="/dashboard"
+                className="flex items-center p-2 text-gray-200 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group hover:text-black"
               >
-                <svg
+                {/* <svg
                   className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
@@ -170,66 +178,126 @@ const Dashboard: React.FC<Props> = () => {
                 >
                   <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
                   <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.025-.432.025-.708a10 10 0 1 0-20 0c0 .276.012.52.025.708a1 1 0 0 0 1 .935H11V1.02c0-.257.01-.475.036-.648A7.459 7.459 0 0 1 12.5 0Z" />
-                </svg>
+                </svg> */}
+                <BiSolidDashboard/>
                 <span className="ml-2">Dashboard</span>
               </a>
             </li>
         
             <li>
               <a
-                href="/"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-              >
-                <svg
-                  className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M3 0C1.34315 0 0 1.34315 0 3V17C0 18.6569 1.34315 20 3 20H17C18.6569 20 20 18.6569 20 17V3C20 1.34315 18.6569 0 17 0H3ZM2 3C2 2.44772 2.44772 2 3 2H17C17.5523 2 18 2.44772 18 3V17C18 17.5523 17.5523 18 17 18H3C2.44772 18 2 17.5523 2 17V3ZM12 12C12 11.4477 12.4477 11 13 11C13.5523 11 14 11.4477 14 12C14 12.5523 13.5523 13 13 13C12.4477 13 12 12.5523 12 12ZM9 3C9 2.44772 9.44772 2 10 2C10.5523 2 11 2.44772 11 3C11 3.55228 10.5523 4 10 4C9.44772 4 9 3.55228 9 3ZM10 6C8.89543 6 8 6.89543 8 8C8 9.10457 8.89543 10 10 10C11.1046 10 12 9.10457 12 8C12 6.89543 11.1046 6 10 6Z"
-                  />
-                </svg>
-                <span className="ml-2">Roadmaps</span>
+                href="/list"
+                className="flex items-center p-2 text-gray-200 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group hover:text-black"              >
+               {/* <svg
+  className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+  aria-hidden="true"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="currentColor"
+  viewBox="0 0 20 20"
+>
+  <path
+    fillRule="evenodd"
+    clipRule="evenodd"
+    d="M10 0C4.47715 0 0 4.47715 0 10C0 13.3148 1.92579 16.3141 5 18.3V20L7.70292 17.5H12.2971L15 20V18.3C18.0742 16.3141 20 13.3148 20 10C20 4.47715 15.5228 0 10 0ZM8.875 12.5C8.875 13.3284 9.54645 14 10.375 14C11.2036 14 11.875 13.3284 11.875 12.5C11.875 11.6716 11.2036 11 10.375 11C9.54645 11 8.875 11.6716 8.875 12.5ZM14.375 12.5C14.375 11.1766 13.1982 10 11.875 10C10.5518 10 9.375 11.1766 9.375 12.5C9.375 13.8234 10.5518 15 11.875 15C13.1982 15 14.375 13.8234 14.375 12.5Z"
+  />
+</svg> */}
+                <FaBriefcase/>
+                <span className="ml-2">Lists</span>
               </a>
             </li>
-            <li>
-              <a
-                href="#"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-              >
-                   <svg
-      className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M14 19l-7-7m0 0l7-7m-7 7h18"
-      ></path>
-    </svg>
-                <span className="ml-2">Logout</span>
-              </a>
-            </li>
+            {token ? (
+  <li>
+    <a
+      href="/logout"
+      className="flex items-center p-2 text-gray-200 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group hover:text-black"
+      >
+      {/* <svg
+        className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M14 19l-7-7m0 0l7-7m-7 7h18"
+        ></path>
+      </svg> */}
+      <FaSignOutAlt/>
+      <span className="ml-2">Logout</span>
+    </a>
+  </li>
+) : (
+  <>
+    <li>
+      <a
+        href="/login"
+        className="flex items-center p-2 text-gray-200 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group hover:text-black"
+        >
+     {/* <svg
+  className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+  fill="none"
+  stroke="currentColor"
+  viewBox="0 0 24 24"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth="2"
+    d="M14 19l-7-7m0 0l7-7m-7 7h18"
+  ></path>
+</svg> */}
+      <BiLogIn/>
+        <span className="ml-2">Login</span>
+      </a>
+    </li>
+    <li>
+      <a
+        href="/register"
+        className="flex items-center p-2 text-gray-200 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group hover:text-black"
+        >
+       {/* <svg
+  className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+  fill="none"
+  stroke="currentColor"
+  viewBox="0 0 24 24"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth="2"
+    d="M14 19l-7-7m0 0l7-7m-7 7h18"
+  ></path>
+</svg> */}
+        <FaUser/> 
+        <span className="ml-2">Sign up</span>
+      </a>
+    </li>
+  </>
+)}
+
           </ul>
         </div>
       </aside>
-
-      <div className="p-4 sm:ml-64">
-        <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
+    {/* //Content */}
+      <div className="p-4 sm:ml-64 bg-gray-800 text-white">
+        <div className="p-4 border-2 border-gray-600 border-solid rounded-lg dark:border-gray-700 h-42 ">
           {/* Your content goes here */}
-          <h1>Interviews</h1>
+          <Status/>
         </div>
+        {/* <hr className='mt-2 border-black' /> */}
+      </div>
+      <div className="p-4 sm:ml-64 bg-gray-800 text-white" >
+        <Myinterviews/>
       </div>
     </div>
   );
 };
 
 export default Dashboard;
+
+// 1f1b28
