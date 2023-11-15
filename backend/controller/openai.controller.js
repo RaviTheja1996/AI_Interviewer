@@ -670,7 +670,7 @@ const fullstackInterviewPatch = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       status: "fail",
-      message: err.message
+      message: err.message,
     });
   }
 };
@@ -678,7 +678,7 @@ const fullstackInterviewPatch = async (req, res) => {
 const getUserInterviewData = async (req, res) => {
   const { userID } = req.body;
   try {
-    const userInterviews = await InterviewModel.find({userId: userID});
+    const userInterviews = await InterviewModel.find({ userId: userID });
 
     const userTotalInterviews = userInterviews.length;
 
