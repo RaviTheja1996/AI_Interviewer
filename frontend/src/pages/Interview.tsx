@@ -2,16 +2,15 @@ import axios from 'axios';
 import React, {useRef, useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import dotenv from 'dotenv';
 import Cookies from 'js-cookie';
 import Chat from '../components/Chat';
-import {FaUser, FaRobot} from "react-icons/fa";
+// import {FaUser, FaRobot} from "react-icons/fa";
 import {IoMdMicrophone} from "react-icons/io";
-// dotenv.config();
+
 const burl = process.env.REACT_APP_BACKEND_URL;
-interface FunctionInterface {
-  (arg1: chatObj, arg2: number): any;
-}
+// interface FunctionInterface {
+//   (arg1: chatObj, arg2: number): any;
+// }
 interface chatObj {
   role: string,
   content: string
@@ -42,7 +41,7 @@ const Interview = () => {
   const [startRecording, setStartRecording] = useState<boolean>(false);
   const [stopRecording, setStopRecording] = useState<boolean>(true);
   const [userContent, setUserContent] = useState<string>("");
-    const [audioUrl, setAudioUrl] = useState<string>("");
+    // const [audioUrl, setAudioUrl] = useState<string>("");
   //Speech functionalities
   const {module} = useParams();
 
@@ -107,6 +106,7 @@ const Interview = () => {
 
     initSpeechRecognition();  
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleStart = () => {
@@ -246,10 +246,10 @@ const Interview = () => {
           <div className='h-[90%] overflow-y-auto'>
 <div className='flex flex-col gap-4'>
   {
-    chatHistory?.map((el, index) => index!=0&&
+    chatHistory?.map((el, index) => index!==0&&
       (<Chat
           key={index}
-          role={el.role == 'assistant' ? true : false}
+          role={el.role === 'assistant' ? true : false}
           text={el.content}
           avatar="https://upload.wikimedia.org/wikipedia/commons/9/9e/Male_Avatar.jpg"
         />)

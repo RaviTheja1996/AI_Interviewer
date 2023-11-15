@@ -12,6 +12,10 @@ app.use(express.json());
 app.use("/user", userRouter);
 app.use("/interview", AI_Interviewer_Router);
 
+app.get("/", (req, res) => {
+  res.status(200).send("Welcome to homepage");
+})
+
 app.listen(process.env.PORT, async () => {
   try {
     await connection;
