@@ -50,7 +50,7 @@ const Card2 = () => {
   
 
   try {
-    axios.get("http://localhost:4500/interview/",{
+    axios.get("https://odd-cyan-basket-clam-hem.cyclic.app/interview/",{
       headers:{
         Authorization: `Bearer ${Cookies.get("token")}`
       }

@@ -44,7 +44,7 @@ export default function Navbar2() {
    let tokenTemp:String | undefined = Cookies.get("token");
     Cookies.remove("token");
 
-   axios.get("http://localhost:4500/user/logout",{
+   axios.get("https://odd-cyan-basket-clam-hem.cyclic.app/user/logout",{
     headers:{
       Authorization : `Bearer ${tokenTemp}`
     }

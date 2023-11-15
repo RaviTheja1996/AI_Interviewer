@@ -26,7 +26,7 @@ const Signup = () => {
     console.log("Form submitted with data:", formData);
 
     try {
-      axios.post("http://localhost:4500/user/register", formData).then((res) => {
+      axios.post("https://odd-cyan-basket-clam-hem.cyclic.app/user/register", formData).then((res) => {
         console.log(res)
         navigate("/login");
       }); 

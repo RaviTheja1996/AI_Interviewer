@@ -50,7 +50,7 @@ const Card3 = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:4500/interview/", {
+        const response = await axios.get("https://odd-cyan-basket-clam-hem.cyclic.app/interview/", {
           headers: {
             Authorization: `Bearer ${Cookies.get("token")}`,
           },

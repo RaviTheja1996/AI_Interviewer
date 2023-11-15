@@ -32,7 +32,7 @@ const Login = () => {
 
     dispatch({ type: LOGINREQUEST });
     try {
-      axios.post("http://localhost:4500/user/login", payload).then((res) => {
+      axios.post("https://odd-cyan-basket-clam-hem.cyclic.app/user/login", payload).then((res) => {
         dispatch({ type: LOGINSUCCESSFUL }); // i have to send user.data
         console.log(res.data.data.token);
       Cookies.set( "token" , res.data.data.token)

@@ -34,7 +34,7 @@ const Dashboard: React.FC<Props> = () => {
     let tokenTemp:String | undefined = Cookies.get("token");
      Cookies.remove("token");
  
-    axios.get("http://localhost:4500/user/logout",{
+    axios.get("https://odd-cyan-basket-clam-hem.cyclic.app/user/logout",{
      headers:{
        Authorization : `Bearer ${tokenTemp}`
      }
@@ -56,6 +56,7 @@ const Dashboard: React.FC<Props> = () => {
     return () => {
       document.removeEventListener('mousedown', handleOutsideClick);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isUserMenuOpen]);
 
   return (

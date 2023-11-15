@@ -123,7 +123,7 @@ const Interview = () => {
 
     // Send a PATCH request using Axios
     try {
-      const response = await axios.patch(`http://localhost:4500/interview/${module}`,
+      const response = await axios.patch(`https://odd-cyan-basket-clam-hem.cyclic.app/interview/${module}`,
       {
         interviewId: interviewId,
         userReply: "End the interview And share the feedback.",
@@ -162,7 +162,7 @@ const Interview = () => {
 
     // Send a PATCH request using Axios
     try {
-      const response = await axios.patch(`http://localhost:4500/interview/${module}`,
+      const response = await axios.patch(`https://odd-cyan-basket-clam-hem.cyclic.app/interview/${module}`,
       {
         interviewId: interviewId,
         userReply: userContent,
