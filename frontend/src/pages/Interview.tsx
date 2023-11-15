@@ -4,14 +4,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import dotenv from 'dotenv';
 import Cookies from 'js-cookie';
+import Chat from '../components/Chat';
+import {FaUser, FaRobot} from "react-icons/fa";
+import {IoMdMicrophone} from "react-icons/io";
 // dotenv.config();
 const burl = process.env.REACT_APP_BACKEND_URL;
+interface FunctionInterface {
+  (arg1: chatObj, arg2: number): any;
+}
+interface chatObj {
+  role: string,
+  content: string
+}
 
 interface Reducer {
   isLoadingNextQuestion: boolean,
   isLoadingInitial: boolean,
   isErrorInitial: boolean,
-  interviewId: string
+  interviewId: string,
+  chatHistory: chatObj[]
 }
 
 interface Store {
@@ -35,12 +46,13 @@ const Interview = () => {
   //Speech functionalities
   const {module} = useParams();
 
-  const {isLoadingNextQuestion, isLoadingInitial, isErrorInitial, interviewId} = useSelector((store:Store ) => {
+  const {isLoadingNextQuestion, isLoadingInitial, isErrorInitial, interviewId, chatHistory} = useSelector((store:Store ) => {
     return {
       isLoadingNextQuestion: store.aiReducer.isLoadingNextQuestion,
       isLoadingInitial: store.aiReducer.isLoadingInitial,
       isErrorInitial: store.aiReducer.isErrorInitial,
-      interviewId: store.aiReducer.interviewId
+      interviewId: store.aiReducer.interviewId,
+      chatHistory: store.aiReducer.chatHistory
     }
   });
   const dispatch = useDispatch();
@@ -65,8 +77,10 @@ const Interview = () => {
           handleTextToSpeech(latestMessage.content);
         }
         let iid = res.data.data.interviewDetails._id;
+        let ch = res.data.data.interviewDetails.chatHistory;
         console.log(iid);
         dispatch({type: "INTERVIEW_ID", payload: iid});
+        dispatch({type: "CHAT_ARRAY", payload: ch});
         console.log(res);
       })
       .catch((err)=>{
@@ -104,6 +118,41 @@ const Interview = () => {
     }
   };
 
+  const endInterview = async () => {
+    
+
+    // Send a PATCH request using Axios
+    try {
+      const response = await axios.patch(`http://localhost:4500/interview/${module}`,
+      {
+        interviewId: interviewId,
+        userReply: "End the interview And share the feedback.",
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${Cookies.get("token")}`
+        },
+      }
+      );
+      console.log("PATCH request successful!", response.data);
+
+      // Clear user content after successful POST
+      setUserContent("");
+
+      // Send latest message to TTS function
+      let latestMessage =
+        response.data.data.chatHistory[response.data.data.chatHistory.length - 1];
+      if (latestMessage.role === "assistant") {
+        handleTextToSpeech(latestMessage.content);
+      }
+      let ch = response.data.data.chatHistory;
+      // console.log(ch)
+      dispatch({type: "CHAT_ARRAY", payload: ch});
+    } catch (error) {
+      console.error("Error in Axios PATCH request:", error);
+    }
+  };
+
   const handleStop = async () => {
     if (recognition) {
       recognition.stop();
@@ -124,9 +173,6 @@ const Interview = () => {
         },
       }
       );
-
-      
-
       console.log("PATCH request successful!", response.data);
 
       // Clear user content after successful POST
@@ -138,6 +184,9 @@ const Interview = () => {
       if (latestMessage.role === "assistant") {
         handleTextToSpeech(latestMessage.content);
       }
+      let ch = response.data.data.chatHistory;
+      // console.log(ch)
+      dispatch({type: "CHAT_ARRAY", payload: ch});
     } catch (error) {
       console.error("Error in Axios PATCH request:", error);
     }
@@ -194,12 +243,29 @@ const Interview = () => {
         </div>
         <div className='w-[32%] h-[30rem] bg-gray-800'>
           <div className='text-center bg-gray-400'><h2 className='text-lg p-2'>Conversation</h2></div>
+          <div className='h-[90%] overflow-y-auto'>
+<div className='flex flex-col gap-4'>
+  {
+    chatHistory?.map((el, index) => index!=0&&
+      (<Chat
+          key={index}
+          role={el.role == 'assistant' ? true : false}
+          text={el.content}
+          avatar="https://upload.wikimedia.org/wikipedia/commons/9/9e/Male_Avatar.jpg"
+        />)
+      )
+  }
+</div>
+          </div>
         </div>
       </div>
 
-      <div className='mt-10 flex justify-center'>
-        {isLoadingNextQuestion?<div className='h-14 '><img className='h-full' src="https://media.giphy.com/media/oOylMv2oLDxcxGzYn6/giphy.gif" alt="ai gif" /></div> : <button onClick={handleStart} className='w-[10rem] rounded-lg p-3 bg-white'>Start Interview</button> }
-        <button onClick={handleStop}>Stop</button>
+      <div className='mt-10 flex justify-center gap-8'>
+        {isLoadingNextQuestion?<div className='h-14 '><img className='h-full' src="https://media.giphy.com/media/oOylMv2oLDxcxGzYn6/giphy.gif" alt="ai gif" /></div> : <button onClick={handleStart} className='w-[10rem] rounded-lg p-3 bg-white flex items-center justify-center gap-3'><p>Start</p><IoMdMicrophone size={30} /></button> }
+        <button className='w-[10rem] rounded-lg p-3 bg-white flex items-center justify-center gap-3' onClick={handleStop}><p>Stop</p> <IoMdMicrophone size={30} /></button>
+      </div>
+      <div className='py-10 flex justify-center'>
+        <button className='w-[10rem] rounded-lg p-3 bg-orange-700' onClick={endInterview}>End Interview</button>
       </div>
     </div>
   )
