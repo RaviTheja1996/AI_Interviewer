@@ -4,6 +4,8 @@ import Myinterviews from '../components/Myinterviews';
 import Cookies from "js-cookie";
 import { FaHome,FaUser,FaBriefcase,FaSignOutAlt } from 'react-icons/fa';
 import {BiSolidDashboard,BiLogIn} from "react-icons/bi"
+import axios from 'axios';
+import { useNavigate } from 'react-router';
 
 interface Props {}
 
@@ -11,7 +13,7 @@ const Dashboard: React.FC<Props> = () => {
   const [isUserMenuOpen, setUserMenuOpen] = useState(false);
   const userMenuButtonRef = useRef<HTMLButtonElement | null>(null);
   const token: string | undefined = Cookies.get("token") || undefined;
-
+  const navigate= useNavigate()
 
   const toggleUserMenu = () => {
     setUserMenuOpen(!isUserMenuOpen);
@@ -26,6 +28,23 @@ const Dashboard: React.FC<Props> = () => {
       closeUserMenu();
     }
   };
+
+  
+  const handleLogout = ()=>{
+    let tokenTemp:String | undefined = Cookies.get("token");
+     Cookies.remove("token");
+ 
+    axios.get("http://localhost:4500/user/logout",{
+     headers:{
+       Authorization : `Bearer ${tokenTemp}`
+     }
+    }).then((res)=>{
+     console.log(res.data);
+     navigate("/")
+    }).catch((err)=> console.log(err))
+ 
+   }
+   
 
   useEffect(() => {
     if (isUserMenuOpen) {
@@ -118,9 +137,10 @@ const Dashboard: React.FC<Props> = () => {
                   </li>
                   <li>
                     <a
-                      href="/logout"
+                      href="#"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                       role="menuitem"
+                      onClick={handleLogout}
                     >
                       Logout
                     </a>
@@ -208,7 +228,7 @@ const Dashboard: React.FC<Props> = () => {
             {token ? (
   <li>
     <a
-      href="/logout"
+     
       className="flex items-center p-2 text-gray-200 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group hover:text-black"
       >
       {/* <svg
@@ -226,7 +246,7 @@ const Dashboard: React.FC<Props> = () => {
         ></path>
       </svg> */}
       <FaSignOutAlt/>
-      <span className="ml-2">Logout</span>
+      <span className="ml-2" onClick={handleLogout}>Logout</span>
     </a>
   </li>
 ) : (
