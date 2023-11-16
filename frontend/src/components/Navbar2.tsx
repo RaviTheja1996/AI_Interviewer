@@ -1,7 +1,7 @@
-import { Fragment, ReactNode } from 'react';
+import { Fragment,useEffect, useState } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import { useDispatch } from "react-redux";
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+// import { useDispatch } from "react-redux";
 import Cookies from "js-cookie"
 import axios from 'axios';
 
@@ -11,18 +11,18 @@ interface NavigationItem {
   current: boolean;
 }
 
-interface MenuButtonProps {
-  open: boolean;
-}
+// interface MenuButtonProps {
+//   open: boolean;
+// }
 
 interface MenuItemsProps {
   active: boolean;
 }
 
-interface ProfileImageProps {
-  src: string;
-  alt: string;
-}
+// interface ProfileImageProps {
+//   src: string;
+//   alt: string;
+// }
 
 function classNames(...classes: (string | boolean)[]): string {
   return classes.filter(Boolean).join(' ');
@@ -38,11 +38,19 @@ const navigation: NavigationItem[] = [
 
 export default function Navbar2() {
 
-  const dispatch = useDispatch();
+  const [isAuth, setIsAuth] = useState(false);
+
+  useEffect(() => {
+  Cookies.get("token") ? setIsAuth(true) : setIsAuth(false);
+  }, []);
+
+  // const dispatch = useDispatch();
 
   const handleLogout = ()=>{
    let tokenTemp:String | undefined = Cookies.get("token");
     Cookies.remove("token");
+    Cookies.remove("username");
+    Cookies.remove("avatar");
 
    axios.get("https://odd-cyan-basket-clam-hem.cyclic.app/user/logout",{
     headers:{
@@ -50,7 +58,7 @@ export default function Navbar2() {
     }
    }).then((res)=>{
     console.log(res.data);
-   }).catch((err)=> console.log(err))
+   }).catch((err)=> console.log(err));
 
   }
   
@@ -117,7 +125,7 @@ export default function Navbar2() {
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
                 </button> */}
                 <div>
-                  {/* <p className='text-white'>Hello, Suriya</p> */}
+                  <p className='text-white'>Hello, {Cookies.get("username")}</p>
                 </div>
 
                 {/* Profile dropdown */}
@@ -126,11 +134,17 @@ export default function Navbar2() {
                     <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="absolute -inset-1.5" />
                       <span className="sr-only">Open user menu</span>
-                      <img
+                      { isAuth ? 
+                      (<img
+                        className="h-8 w-8 rounded-full"
+                        src={Cookies.get("avatar")}
+                        alt="user avatar"
+                      />) :
+                      (<img
                         className="h-8 w-8 rounded-full"
                         src="https://img.freepik.com/premium-photo/memoji-happy-man-white-background-emoji_826801-6840.jpg?size=338&ext=jpg&ga=GA1.1.1826414947.1698883200&semt=ais"
                         alt=""
-                      />
+                      />)}
                     </Menu.Button>
                   </div>
                   <Transition

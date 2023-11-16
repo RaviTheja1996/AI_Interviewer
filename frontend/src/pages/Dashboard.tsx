@@ -109,11 +109,16 @@ const Dashboard: React.FC<Props> = () => {
                   >
                     <span className="sr-only">Open user menu</span>
                  
-                    <img
+                    {/* <img
                       className="w-8 h-8 rounded-full"
                       src="https://img.freepik.com/premium-photo/memoji-happy-man-white-background-emoji_826801-6840.jpg?size=338&ext=jpg&ga=GA1.1.1826414947.1698883200&semt=ais"
                       alt="img"
-                    />
+                    /> */}
+                    <img
+                        className="h-8 w-8 rounded-full"
+                        src={Cookies.get("avatar")}
+                        alt="user avatar"
+                      />
                   </button>
                 </div>
                 {isUserMenuOpen && (

@@ -4,7 +4,7 @@ const { UserModel } = require("../models/user.model");
 const { BlackListModel } = require("../models/blacklist.model");
 
 const userRegister = async (req, res) => {
-  const { username, email, password,avatar } = req.body;
+  const { username, email, password, avatar } = req.body;
 
   try {
     // Check if the user already exists
@@ -69,6 +69,8 @@ const userLogin = async (req, res) => {
           data: {
             token,
           },
+          username: user.username,
+          avatar: user.avatar
         });
       } else {
         return res.status(200).send({

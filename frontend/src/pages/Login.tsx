@@ -35,9 +35,11 @@ const Login = () => {
       axios.post("https://odd-cyan-basket-clam-hem.cyclic.app/user/login", payload).then((res) => {
         dispatch({ type: LOGINSUCCESSFUL }); // i have to send user.data
         console.log(res.data.data.token);
-      Cookies.set( "token" , res.data.data.token)
+      Cookies.set( "token" , res.data.data.token);
+      Cookies.set("username",res.data.username);
+      Cookies.set("avatar",res.data.avatar);
       navigate("/")
-      }); // i have to change the link aswell
+      }); // i have to change the link as well
     } catch (error) {
       dispatch({ type: LOGINERROR });
     }
