@@ -39,9 +39,24 @@ const navigation: NavigationItem[] = [
 export default function Navbar2() {
 
   const [isAuth, setIsAuth] = useState(false);
+  const [userAvatar, setUserAvatar] = useState<string | undefined>("");
+  const [userName, setUserName] = useState<String | undefined>("");
+
+  const checkAuthStatus = () => {
+    Cookies.get("token") ? setIsAuth(true) : setIsAuth(false);
+    Cookies.get("avatar") ? setUserAvatar(Cookies.get("avatar")) : setUserAvatar("");
+    Cookies.get("username") ? setUserName(Cookies.get("username")) : setUserName("");
+  };
 
   useEffect(() => {
-  Cookies.get("token") ? setIsAuth(true) : setIsAuth(false);
+    checkAuthStatus();
+    const handleCookieChange = () => {
+      checkAuthStatus();
+    };
+    window.addEventListener('storage', handleCookieChange);
+    return () => {
+      window.removeEventListener('storage', handleCookieChange);
+    };
   }, []);
 
   // const dispatch = useDispatch();
@@ -125,7 +140,7 @@ export default function Navbar2() {
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
                 </button> */}
                 <div>
-                  <p className='text-white'>Hello, {Cookies.get("username")}</p>
+                  {Cookies.get("token") ? (<p className='text-white'>Hello, {Cookies.get("username")}</p>) : ""}
                 </div>
 
                 {/* Profile dropdown */}
