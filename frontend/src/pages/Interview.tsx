@@ -233,15 +233,15 @@ const Interview = () => {
 
   return (
     <div className='bg-gray-900 relative'>
-      {isLoadingInitial && <div className='w-full h-[100vh] bg-white bg-opacity-30 absolute flex justify-center items-center'><h1 className='text-3xl '>Loading...</h1></div>}
+      {isLoadingInitial && <div className='w-full h-full bg-white bg-opacity-30 absolute flex justify-center items-center'><h1 className='text-3xl '>Loading...</h1></div>}
 
       <div className='text-center'><h1 className='text-white text-3xl py-5'>Welcome to {module} interview</h1></div>
 
       <div className='flex w-[90%] mx-auto justify-between '>
-        <div className='w-[65%] h-[30rem] bg-gray-800 overflow-hidden'>
+        <div className='w-[57%] rounded-lg h-[30rem] bg-gray-800 overflow-hidden'>
           <video className='w-full' ref={videoEl} id='videoElement' autoPlay={true} ></video>
         </div>
-        <div className='w-[32%] h-[30rem] bg-gray-800'>
+        <div className='w-[40%] rounded-lg overflow-hidden h-[30rem] bg-gray-800'>
           <div className='text-center bg-gray-400'><h2 className='text-lg p-2'>Conversation</h2></div>
           <div className='h-[90%] overflow-y-auto'>
 <div className='flex flex-col gap-4'>
@@ -251,7 +251,7 @@ const Interview = () => {
           key={index}
           role={el.role === 'assistant' ? true : false}
           text={el.content}
-          avatar="https://upload.wikimedia.org/wikipedia/commons/9/9e/Male_Avatar.jpg"
+          avatar={el.role != 'assistant' ? "https://upload.wikimedia.org/wikipedia/commons/9/9e/Male_Avatar.jpg": "https://img6.arthub.ai/64eca2b6-b8a0.webp"}
         />)
       )
   }
